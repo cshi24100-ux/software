@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>単語学習アプリ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>単語学習アプリ</h1>
+      <p>英単語・専門用語の学習管理</p>
+    </div>
+  </header>
+
+  <main class="app-layout">
+    <section class="panel">
+      <div class="section-title">
+        <h2>単語登録</h2>
+        <button type="button" id="resetFormButton" class="secondary-button">入力をクリア</button>
+      </div>
+
+      <form id="wordForm" class="word-form" novalidate>
+        <input type="hidden" id="editingWordId">
+
+        <div class="form-grid">
+          <label>
+            単語 <span class="required">必須</span>
+            <input type="text" id="wordInput" placeholder="例: algorithm">
+          </label>
+
+          <label>
+            意味 <span class="required">必須</span>
+            <input type="text" id="meaningInput" placeholder="例: 問題を解くための手順">
+          </label>
+
+          <label>
+            品詞
+            <input type="text" id="partOfSpeechInput" placeholder="例: 名詞">
+          </label>
+
+          <label>
+            例文
+            <textarea id="exampleInput" rows="3" placeholder="例: This algorithm is easy to understand."></textarea>
+          </label>
+        </div>
+
+        <p id="formMessage" class="message" aria-live="polite"></p>
+
+        <div class="button-row">
+          <button type="submit" id="saveButton" class="primary-button">登録する</button>
+          <button type="button" id="cancelEditButton" class="secondary-button is-hidden">編集をやめる</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="stats-grid" aria-label="学習状態">
+      <div class="stat-box">
+        <span class="stat-label">登録数</span>
+        <strong id="totalCount">0</strong>
+      </div>
+      <div class="stat-box learned">
+        <span class="stat-label">覚えた</span>
+        <strong id="learnedCount">0</strong>
+      </div>
+      <div class="stat-box not-learned">
+        <span class="stat-label">未学習</span>
+        <strong id="notLearnedCount">0</strong>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <h2>単語一覧</h2>
+        <span id="visibleCount" class="small-status">0件表示</span>
+      </div>
+
+      <div class="search-area">
+        <label>
+          検索
+          <input type="search" id="searchInput" placeholder="単語・意味・品詞・例文で検索">
+        </label>
+
+        <label>
+          状態
+          <select id="statusFilter">
+            <option value="all">すべて</option>
+            <option value="learned">覚えた</option>
+            <option value="notLearned">未学習</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="wordList" class="word-list"></div>
+      <p id="emptyMessage" class="empty-message">登録された単語はありません。</p>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <h2>確認テスト</h2>
+        <button type="button" id="startQuizButton" class="primary-button">問題を出す</button>
+      </div>
+
+      <div class="quiz-controls">
+        <label>
+          出題形式
+          <select id="quizMode">
+            <option value="wordToMeaning">単語を見て意味を答える</option>
+            <option value="meaningToWord">意味を見て単語を答える</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="quiz-box">
+        <p class="quiz-label">問題</p>
+        <p id="quizQuestion" class="quiz-question">単語を登録してから問題を出してください。</p>
+        <p id="quizSubInfo" class="quiz-sub-info"></p>
+
+        <div class="answer-row">
+          <input type="text" id="answerInput" placeholder="答えを入力">
+          <button type="button" id="checkAnswerButton" class="primary-button">判定する</button>
+        </div>
+
+        <p id="quizResult" class="message" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
