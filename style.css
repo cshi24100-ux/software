@@ -122,10 +122,21 @@ textarea {
 
 .button-row,
 .answer-row,
-.word-actions {
+.word-actions,
+.example-tools {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.example-tools {
+  align-items: center;
+  margin-top: 12px;
+}
+
+.example-tools span {
+  color: #6b7280;
+  font-size: 14px;
 }
 
 .button-row {
