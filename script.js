@@ -11,7 +11,6 @@ const formMessage = document.getElementById("formMessage");
 const saveButton = document.getElementById("saveButton");
 const resetFormButton = document.getElementById("resetFormButton");
 const cancelEditButton = document.getElementById("cancelEditButton");
-const generateExampleButton = document.getElementById("generateExampleButton");
 const exportCsvButton = document.getElementById("exportCsvButton");
 const importCsvInput = document.getElementById("importCsvInput");
 const csvMessage = document.getElementById("csvMessage");
@@ -51,7 +50,6 @@ renderApp();
 wordForm.addEventListener("submit", handleFormSubmit);
 resetFormButton.addEventListener("click", resetForm);
 cancelEditButton.addEventListener("click", resetForm);
-generateExampleButton.addEventListener("click", generateExample);
 exportCsvButton.addEventListener("click", exportCsv);
 importCsvInput.addEventListener("change", importCsv);
 searchInput.addEventListener("input", renderWordList);
@@ -136,63 +134,6 @@ function updateWord(wordId, wordText, meaningText) {
   targetWord.example = exampleInput.value.trim();
 
   return true;
-}
-
-function generateExample() {
-  const wordText = wordInput.value.trim();
-  const meaningText = meaningInput.value.trim();
-  const partOfSpeechText = partOfSpeechInput.value.trim();
-
-  if (wordText === "") {
-    showMessage(formMessage, "例文を作るには、先に単語を入力してください。", "error");
-    wordInput.focus();
-    return;
-  }
-
-  if (exampleInput.value.trim() !== "") {
-    const confirmed = window.confirm("現在の例文を自動作成した例文で上書きしますか？");
-
-    if (!confirmed) {
-      return;
-    }
-  }
-
-  exampleInput.value = createExampleSentence(wordText, meaningText, partOfSpeechText);
-  showMessage(formMessage, "例文を自動作成しました。必要に応じて直してください。", "success");
-  exampleInput.focus();
-}
-
-// APIを使わず、入力された品詞に合わせたテンプレートで例文を作ります。
-function createExampleSentence(wordText, meaningText, partOfSpeechText) {
-  const lowerPartOfSpeech = partOfSpeechText.toLowerCase();
-
-  if (containsAnyText(lowerPartOfSpeech, ["動詞", "verb", "v."])) {
-    return `I need to ${wordText} it carefully.`;
-  }
-
-  if (containsAnyText(lowerPartOfSpeech, ["形容詞", "adjective", "adj"])) {
-    return `This is a ${wordText} example.`;
-  }
-
-  if (containsAnyText(lowerPartOfSpeech, ["副詞", "adverb", "adv"])) {
-    return `She explained the idea ${wordText}.`;
-  }
-
-  if (containsAnyText(lowerPartOfSpeech, ["名詞", "noun", "n."])) {
-    return `The ${wordText} is important for understanding this topic.`;
-  }
-
-  if (meaningText !== "") {
-    return `The term "${wordText}" means "${meaningText}".`;
-  }
-
-  return `I learned the word "${wordText}" in today's lesson.`;
-}
-
-function containsAnyText(text, keywords) {
-  return keywords.some(function (keyword) {
-    return text.includes(keyword);
-  });
 }
 
 function exportCsv() {
