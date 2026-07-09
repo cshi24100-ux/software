@@ -36,6 +36,11 @@
           </label>
 
           <label>
+            カテゴリ
+            <input type="text" id="categoryInput" placeholder="例: ITパスポート / 会計 / 英単語">
+          </label>
+
+          <label>
             品詞
             <input type="text" id="partOfSpeechInput" placeholder="例: 名詞">
           </label>
@@ -77,6 +82,20 @@
 
     <section class="panel">
       <div class="section-title">
+        <h2>データ管理</h2>
+      </div>
+
+      <div class="data-tools">
+        <button type="button" id="exportCsvButton" class="secondary-button">CSVエクスポート</button>
+        <label for="importCsvInput" class="import-label">CSVインポート</label>
+        <input type="file" id="importCsvInput" class="is-hidden" accept=".csv,text/csv">
+      </div>
+
+      <p id="csvMessage" class="message" aria-live="polite"></p>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
         <h2>単語一覧</h2>
         <span id="visibleCount" class="small-status">0件表示</span>
       </div>
@@ -84,7 +103,14 @@
       <div class="search-area">
         <label>
           検索
-          <input type="search" id="searchInput" placeholder="単語・意味・品詞・例文で検索">
+          <input type="search" id="searchInput" placeholder="単語・意味・カテゴリ・品詞・例文で検索">
+        </label>
+
+        <label>
+          カテゴリ
+          <select id="categoryFilter">
+            <option value="all">すべて</option>
+          </select>
         </label>
 
         <label>
@@ -124,7 +150,15 @@
 
         <div class="answer-row">
           <input type="text" id="answerInput" placeholder="答えを入力">
-          <button type="button" id="checkAnswerButton" class="primary-button">判定する</button>
+          <button type="button" id="checkAnswerButton" class="primary-button">答えを確認</button>
+        </div>
+
+        <div id="selfGradeArea" class="self-grade-area is-hidden">
+          <p id="correctAnswerText" class="correct-answer"></p>
+          <div class="button-row">
+            <button type="button" id="selfCorrectButton" class="primary-button">正解にする</button>
+            <button type="button" id="selfWrongButton" class="danger-button">不正解にする</button>
+          </div>
         </div>
 
         <p id="quizResult" class="message" aria-live="polite"></p>

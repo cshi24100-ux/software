@@ -123,7 +123,8 @@ textarea {
 .button-row,
 .answer-row,
 .word-actions,
-.example-tools {
+.example-tools,
+.data-tools {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -146,7 +147,8 @@ textarea {
 .primary-button,
 .secondary-button,
 .danger-button,
-.status-button {
+.status-button,
+.import-label {
   min-height: 42px;
   border: 0;
   border-radius: 6px;
@@ -159,7 +161,8 @@ textarea {
   color: #ffffff;
 }
 
-.secondary-button {
+.secondary-button,
+.import-label {
   background: #e8eef4;
   color: #243447;
 }
@@ -183,7 +186,8 @@ textarea {
   background: #116a65;
 }
 
-.secondary-button:hover {
+.secondary-button:hover,
+.import-label:hover {
   background: #d7e0ea;
 }
 
@@ -193,6 +197,22 @@ textarea {
 
 .status-button:hover {
   filter: brightness(0.96);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.import-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.data-tools {
+  align-items: center;
 }
 
 .stats-grid {
@@ -226,7 +246,7 @@ textarea {
 }
 
 .search-area {
-  grid-template-columns: 1fr 180px;
+  grid-template-columns: 1fr 220px 180px;
   margin-bottom: 16px;
 }
 
@@ -267,6 +287,17 @@ textarea {
   margin-top: 4px;
   color: #5b6472;
   font-size: 14px;
+}
+
+.word-category {
+  display: inline-block;
+  margin: 0 8px 6px 0;
+  border-radius: 999px;
+  padding: 3px 9px;
+  background: #e0f2f1;
+  color: #116a65;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .state-badge {
@@ -335,6 +366,19 @@ textarea {
 
 .answer-row input {
   flex: 1 1 260px;
+}
+
+.self-grade-area {
+  margin-top: 14px;
+  border-top: 1px solid #dfe5ec;
+  padding-top: 14px;
+}
+
+.correct-answer {
+  margin: 0 0 10px;
+  color: #111827;
+  font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .message {
